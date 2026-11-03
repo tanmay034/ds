@@ -6,7 +6,6 @@ class Solution {
         Fenwick(int n) {
             tree = new int[n + 1];
         }
-
         void add(int index, int value) {
             while (index < tree.length) {
                 tree[index] += value;

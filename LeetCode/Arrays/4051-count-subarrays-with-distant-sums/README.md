@@ -1,6 +1,6 @@
 # 4051. Count Subarrays with Distant Sums
 
-> **Platform:** `LeetCode` | **Topic:** `Arrays` | **Difficulty:** `Hard` | **Languages:** `JAVA` | [Problem Link](https://leetcode.com/problems/count-subarrays-with-distant-sums/description/)
+> **Platform:** `LeetCode` | **Topic:** `Arrays` | **Difficulty:** `Hard` | **Languages:** `JAVA` | [Problem Link](https://leetcode.com/problems/count-subarrays-with-distant-sums/submissions/2188933640/)
 
 ---
 
@@ -108,7 +108,6 @@ class Solution {
         Fenwick(int n) {
             tree = new int[n + 1];
         }
-
         void add(int index, int value) {
             while (index < tree.length) {
                 tree[index] += value;
