@@ -1,6 +1,6 @@
 # 4051. Count Subarrays with Distant Sums
 
-> **Platform:** `LeetCode` | **Topic:** `Arrays` | **Difficulty:** `Hard` | **Languages:** `PYTHON, CPP, JAVA` | [Problem Link](https://leetcode.com/problems/count-subarrays-with-distant-sums/)
+> **Platform:** `LeetCode` | **Topic:** `Arrays` | **Difficulty:** `Hard` | **Languages:** `PYTHON, CPP, JAVA` | [Problem Link](https://leetcode.com/problems/count-subarrays-with-distant-sums/solutions/8517715/javacpython-prefix-sum-by-lee215-zfj7/)
 
 ---
 
@@ -91,7 +91,7 @@ Thus, the answer is 2.
 ## Complexity Analysis
 
 - **Time Complexity:** `O(N) — Linear scan through the input`
-- **Space Complexity:** `O(N) — Auxiliary data structure storage`
+- **Space Complexity:** `O(1) — Constant auxiliary space (in-place)`
 
 ---
 
@@ -100,17 +100,7 @@ Thus, the answer is 2.
 ### PYTHON (`solution.py`)
 
 ```python
-def distantSubarrays(self, A: list[int], goal: int, k: int) -> int:
-        if k == 0:
-            return len(A) * (len(A) + 1) // 2
-        st = SortedList([0])
-        res = p = 0
-        for a in A:
-            p += a
-            res += st.bisect_right(p - (goal + k))
-            res += len(st) - st.bisect_left(p - (goal - k))
-            st.add(p)
-        return res
+Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36
 ```
 
 ### CPP (`solution.cpp`)
