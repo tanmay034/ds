@@ -1,6 +1,6 @@
 # 4051. Count Subarrays with Distant Sums
 
-> **Platform:** `LeetCode` | **Topic:** `Arrays` | **Difficulty:** `Hard` | **Languages:** `CPP, JAVA` | [Problem Link](https://leetcode.com/problems/count-subarrays-with-distant-sums/description/)
+> **Platform:** `LeetCode` | **Topic:** `Arrays` | **Difficulty:** `Hard` | **Languages:** `CPP, JAVA` | [Problem Link](https://leetcode.com/problems/count-subarrays-with-distant-sums/)
 
 ---
 
@@ -299,4 +299,4 @@ class Solution {
 
 ---
 
-*Synced automatically with [DSA Vault](https://github.com/tanmay9783/dsa-vault).*
+*Synced automatically with [DSASync](https://github.com/tanmay9783/DSASync).*
