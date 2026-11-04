@@ -105,7 +105,6 @@ public:
     long long int sol = 0;
     void merge(vector<long long int>& st, vector<long long int>& temp,
                int l, int mid, int r, int goal, int k) {
-
         int p1 = l;
         int p2 = l;
 
