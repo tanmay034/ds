@@ -1,6 +1,6 @@
 # 4051. Count Subarrays with Distant Sums
 
-> **Platform:** `LeetCode` | **Topic:** `Arrays` | **Difficulty:** `Hard` | **Languages:** `PYTHON, CPP, JAVA` | [Problem Link](https://leetcode.com/problems/count-subarrays-with-distant-sums/solutions/8517715/javacpython-prefix-sum-by-lee215-zfj7/)
+> **Platform:** `LeetCode` | **Topic:** `Arrays` | **Difficulty:** `Hard` | **Languages:** `PYTHON, CPP, JAVA` | [Problem Link](https://leetcode.com/problems/count-subarrays-with-distant-sums/solutions/)
 
 ---
 
