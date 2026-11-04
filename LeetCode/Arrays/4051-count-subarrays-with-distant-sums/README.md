@@ -1,6 +1,6 @@
 # 4051. Count Subarrays with Distant Sums
 
-> **Platform:** `LeetCode` | **Topic:** `Arrays` | **Difficulty:** `Hard` | **Languages:** `JAVA, CPP, PYTHON` | [Problem Link](https://leetcode.com/problems/count-subarrays-with-distant-sums/)
+> **Platform:** `LeetCode` | **Topic:** `Arrays` | **Difficulty:** `Hard` | **Languages:** `JAVA, CPP, PYTHON` | [Problem Link](https://leetcode.com/problems/count-subarrays-with-distant-sums/description/)
 
 ---
 
@@ -91,7 +91,7 @@ Thus, the answer is 2.
 ## Complexity Analysis
 
 - **Time Complexity:** `O(N) — Linear scan through the input`
-- **Space Complexity:** `O(N) — Auxiliary data structure storage`
+- **Space Complexity:** `O(1) — Constant auxiliary space (in-place)`
 
 ---
 
@@ -100,43 +100,7 @@ Thus, the answer is 2.
 ### JAVA (`solution.java`)
 
 ```java
-class Solution:
-    def distantSubarrays(self, nums: list[int], goal: int, k: int) -> int:
-        #count the number of subarrays with disticnt sums
-
-
-        #we are given goal ,  k 
-
-        #the subarray is called distinct iff abs difference between its 
-
-        #sum and goal is >= k 
-
-
-        #(prefix[j]-prefix[i-1])>=k+goal is called distant 
-
-        #pref-k-goal>=past 
-
-        #so i need how many are greater than this 
-        #find number of distant subarrays 
-        #easyy sortedlist we need 
-        sl=SortedList()
-        pref=0
-        if k==0:
-            # abs(val)>=0
-            return (len(nums)*(len(nums)+1))//2
-        cnt=0
-        sl.add(pref)
-        for val in nums:
-            pref+=val
-            #now we need prefix greater 
-            past=pref-k-goal
-            cnt+=sl.bisect_right(past)
-            # if k==0:
-                # continue
-            future=pref-goal+k
-            cnt+=(len(sl)-sl.bisect_left(future))
-            sl.add(pref)
-        return cnt
+Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36
 ```
 
 ### CPP (`solution.cpp`)
