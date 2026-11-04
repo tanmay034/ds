@@ -1,6 +1,6 @@
 # 4051. Count Subarrays with Distant Sums
 
-> **Platform:** `LeetCode` | **Topic:** `Arrays` | **Difficulty:** `Hard` | **Languages:** `PYTHON, CPP, JAVA` | [Problem Link](https://leetcode.com/problems/count-subarrays-with-distant-sums/submissions/2189377887/)
+> **Platform:** `LeetCode` | **Topic:** `Arrays` | **Difficulty:** `Hard` | **Languages:** `CPP, JAVA, PYTHON` | [Problem Link](https://leetcode.com/problems/count-subarrays-with-distant-sums/)
 
 ---
 
@@ -97,9 +97,9 @@ Thus, the answer is 2.
 
 ## Solution
 
-### PYTHON (`solution.py`)
+### CPP (`solution.cpp`)
 
-```python
+```cpp
 class Solution:
     def distantSubarrays(self, nums: list[int], goal: int, k: int) -> int:
         #count the number of subarrays with disticnt sums
@@ -137,88 +137,6 @@ class Solution:
             cnt+=(len(sl)-sl.bisect_left(future))
             sl.add(pref)
         return cnt
-```
-
-### CPP (`solution.cpp`)
-
-```cpp
-class Solution {
-public:
-    long long int sol = 0;
-    void merge(vector<long long int>& st, vector<long long int>& temp,
-               int l, int mid, int r, int goal, int k) {
-
-        int p1 = l;
-        int p2 = l;
-
-        for (int j = mid + 1; j <= r; j++) {
-            long long int x = st[j] - goal + k;
-
-            while (p1 <= mid && st[p1] < x) {
-                p1++;
-            }
-
-            sol += mid - p1 + 1;
-
-            x = st[j] - goal - k;
-
-            while (p2 <= mid && st[p2] <= x) {
-                p2++;
-            }
-
-            sol += p2 - l;
-        }
-
-        int i = l;
-        int j = mid + 1;
-        int idx = l;
-
-        while (i <= mid && j <= r) {
-            if (st[i] <= st[j]) {
-                temp[idx++] = st[i++];
-            } else {
-                temp[idx++] = st[j++];
-            }
-        }
-
-        while (i <= mid) {
-            temp[idx++] = st[i++];
-        }
-
-        while (j <= r) {
-            temp[idx++] = st[j++];
-        }
-
-        for (int i = l; i <= r; i++) {
-            st[i] = temp[i];
-        }
-    }
-    void solve(vector<long long int>& st, vector<long long int>& temp, int l, int r, int goal, int k){
-        if (l >= r) {
-            return;
-        }
-        int mid = l + (r - l) / 2;
-        solve(st, temp, l, mid, goal, k);
-        solve(st, temp, mid + 1, r, goal, k);
-        merge(st, temp, l, mid, r, goal, k);
-    }
-    long long distantSubarrays(vector<int>& nums, int goal, int k) {
-        long long int n = nums.size();
-        if (k == 0) {
-            return 1ll * n * (n + 1) / 2;
-        }
-        vector<long long int> st;
-        vector<long long int> temp(n + 1);
-        long long int pre = 0;
-        st.push_back(0);
-        for (auto it : nums) {
-            pre += it;
-            st.push_back(pre);
-        }
-        solve(st, temp, 0, n, goal, k);
-        return sol;
-    }
-};
 ```
 
 ### JAVA (`solution.java`)
@@ -300,6 +218,48 @@ public:
         return sol;
     }
 };
+```
+
+### PYTHON (`solution.py`)
+
+```python
+class Solution:
+    def distantSubarrays(self, nums: list[int], goal: int, k: int) -> int:
+        #count the number of subarrays with disticnt sums
+
+
+        #we are given goal ,  k 
+
+        #the subarray is called distinct iff abs difference between its 
+
+        #sum and goal is >= k 
+
+
+        #(prefix[j]-prefix[i-1])>=k+goal is called distant 
+
+        #pref-k-goal>=past 
+
+        #so i need how many are greater than this 
+        #find number of distant subarrays 
+        #easyy sortedlist we need 
+        sl=SortedList()
+        pref=0
+        if k==0:
+            # abs(val)>=0
+            return (len(nums)*(len(nums)+1))//2
+        cnt=0
+        sl.add(pref)
+        for val in nums:
+            pref+=val
+            #now we need prefix greater 
+            past=pref-k-goal
+            cnt+=sl.bisect_right(past)
+            # if k==0:
+                # continue
+            future=pref-goal+k
+            cnt+=(len(sl)-sl.bisect_left(future))
+            sl.add(pref)
+        return cnt
 ```
 
 ---
