@@ -1,112 +1,77 @@
 class Solution {
+public:
+    long long int sol = 0;
+    void merge(vector<long long int>& st, vector<long long int>& temp,
+               int l, int mid, int r, int goal, int k) {
 
-    static class Fenwick {
-        int[] tree;
+        int p1 = l;
+        int p2 = l;
 
-        Fenwick(int n) {
-            tree = new int[n + 1];
-        }
-        void add(int index, int value) {
-            while (index < tree.length) {
-                tree[index] += value;
-                index += index & -index;
-            }
-        }
+        for (int j = mid + 1; j <= r; j++) {
+            long long int x = st[j] - goal + k;
 
-        int query(int index) {
-            int sum = 0;
-
-            while (index > 0) {
-                sum += tree[index];
-                index -= index & -index;
+            while (p1 <= mid && st[p1] < x) {
+                p1++;
             }
 
-            return sum;
-        }
+            sol += mid - p1 + 1;
 
-        int rangeQuery(int left, int right) {
-            if (left > right) {
-                return 0;
+            x = st[j] - goal - k;
+
+            while (p2 <= mid && st[p2] <= x) {
+                p2++;
             }
 
-            return query(right) - query(left - 1);
+            sol += p2 - l;
         }
-    }
 
-    static int lowerBound(long[] arr, int size, long target) {
-        int left = 0;
-        int right = size;
+        int i = l;
+        int j = mid + 1;
+        int idx = l;
 
-        while (left < right) {
-            int mid = left + (right - left) / 2;
-
-            if (arr[mid] >= target) {
-                right = mid;
+        while (i <= mid && j <= r) {
+            if (st[i] <= st[j]) {
+                temp[idx++] = st[i++];
             } else {
-                left = mid + 1;
+                temp[idx++] = st[j++];
             }
         }
 
-        return left;
+        while (i <= mid) {
+            temp[idx++] = st[i++];
+        }
+
+        while (j <= r) {
+            temp[idx++] = st[j++];
+        }
+
+        for (int i = l; i <= r; i++) {
+            st[i] = temp[i];
+        }
     }
-
-    static int upperBound(long[] arr, int size, long target) {
-        int left = 0;
-        int right = size;
-
-        while (left < right) {
-            int mid = left + (right - left) / 2;
-
-            if (arr[mid] > target) {
-                right = mid;
-            } else {
-                left = mid + 1;
-            }
+    void solve(vector<long long int>& st, vector<long long int>& temp, int l, int r, int goal, int k){
+        if (l >= r) {
+            return;
         }
-
-        return left;
+        int mid = l + (r - l) / 2;
+        solve(st, temp, l, mid, goal, k);
+        solve(st, temp, mid + 1, r, goal, k);
+        merge(st, temp, l, mid, r, goal, k);
     }
-
-    public long distantSubarrays(int[] nums, int goal, int k) {
-        int n = nums.length;
-        long[] prefix = new long[n + 1];
-
-        for (int i = 0; i < n; i++) {
-            prefix[i + 1] = prefix[i] + nums[i];
+    long long distantSubarrays(vector<int>& nums, int goal, int k) {
+        long long int n = nums.size();
+        if (k == 0) {
+            return 1ll * n * (n + 1) / 2;
         }
-
-        long[] sorted = Arrays.copyOf(prefix, n + 1);
-        Arrays.sort(sorted);
-
-        int m = 0;
-
-        for (int i = 0; i < sorted.length; i++) {
-            if (i == 0 || sorted[i] != sorted[i - 1]) {
-                sorted[m++] = sorted[i];
-            }
+        vector<long long int> st;
+        vector<long long int> temp(n + 1);
+        long long int pre = 0;
+        st.push_back(0);
+        for (auto it : nums) {
+            pre += it;
+            st.push_back(pre);
         }
-
-        Fenwick bit = new Fenwick(m);
-        long close = 0;
-
-        for (int j = 0; j <= n; j++) {
-            long current = prefix[j];
-
-            long lowerValue = current - ((long) goal + k);
-            long upperValue = current - ((long) goal - k);
-
-            int left = upperBound(sorted, m, lowerValue);
-            int right = lowerBound(sorted, m, upperValue) - 1;
-
-            if (left <= right) {
-                close += bit.rangeQuery(left + 1, right + 1);
-            }
-
-            int position = lowerBound(sorted, m, current);
-            bit.add(position + 1, 1);
-        }
-
-        long total = (long) n * (n + 1) / 2;
-        return total - close;
+        solve(st, temp, 0, n, goal, k);
+        return sol;
     }
-}
+};
