@@ -1,6 +1,6 @@
 # Minimum Jumps
 
-> **Platform:** `GFG` | **Topic:** `Arrays` | **Languages:** `PYTHON` | [Problem Link](https://www.geeksforgeeks.org/problems/minimum-number-of-jumps-1587115620/1)
+> **Platform:** `GFG` | **Topic:** `Arrays` | **Languages:** `CPP, PYTHON` | [Problem Link](https://www.geeksforgeeks.org/problems/minimum-number-of-jumps-1587115620/1)
 
 ---
 
@@ -40,12 +40,24 @@ Explanation: We cannot go anywhere from the 1st element.
 
 ## Complexity Analysis
 
-- **Time Complexity:** `O(N²) — Nested loop traversal`
+- **Time Complexity:** `O(N) — Linear scan through the input`
 - **Space Complexity:** `O(N) — Auxiliary data structure storage`
 
 ---
 
 ## Solution
+
+### CPP (`optimal.cpp`)
+
+```cpp
+class Solution {
+  public:
+    int minJumps(vector<int>& arr) {
+        // code here
+        
+    }
+};
+```
 
 ### PYTHON (`optimal.py`)
 
