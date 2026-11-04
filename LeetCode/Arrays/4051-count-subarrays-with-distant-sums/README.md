@@ -1,6 +1,6 @@
 # 4051. Count Subarrays with Distant Sums
 
-> **Platform:** `LeetCode` | **Topic:** `Arrays` | **Difficulty:** `Hard` | **Languages:** `CPP, JAVA` | [Problem Link](https://leetcode.com/problems/count-subarrays-with-distant-sums/)
+> **Platform:** `LeetCode` | **Topic:** `Arrays` | **Difficulty:** `Hard` | **Languages:** `CPP, JAVA` | [Problem Link](https://leetcode.com/problems/count-subarrays-with-distant-sums/submissions/2189367948/)
 
 ---
 
@@ -103,7 +103,6 @@ Thus, the answer is 2.
 class Solution {
 public:
     long long int sol = 0;
-
     void merge(vector<long long int>& st, vector<long long int>& temp,
                int l, int mid, int r, int goal, int k) {
 
