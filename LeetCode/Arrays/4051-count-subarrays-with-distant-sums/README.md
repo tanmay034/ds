@@ -1,6 +1,6 @@
 # 4051. Count Subarrays with Distant Sums
 
-> **Platform:** `LeetCode` | **Topic:** `Arrays` | **Difficulty:** `Hard` | **Languages:** `JAVA, CPP` | [Problem Link](https://leetcode.com/problems/count-subarrays-with-distant-sums/description/)
+> **Platform:** `LeetCode` | **Topic:** `Arrays` | **Difficulty:** `Hard` | **Languages:** `PYTHON, CPP, JAVA` | [Problem Link](https://leetcode.com/problems/count-subarrays-with-distant-sums/)
 
 ---
 
@@ -90,21 +90,38 @@ Thus, the answer is 2.
 
 ## Complexity Analysis
 
-- **Time Complexity:** `O(N²) — Nested loop traversal`
+- **Time Complexity:** `O(N) — Linear scan through the input`
 - **Space Complexity:** `O(N) — Auxiliary data structure storage`
 
 ---
 
 ## Solution
 
-### JAVA (`solution.java`)
+### PYTHON (`solution.py`)
 
-```java
+```python
+def distantSubarrays(self, A: list[int], goal: int, k: int) -> int:
+        if k == 0:
+            return len(A) * (len(A) + 1) // 2
+        st = SortedList([0])
+        res = p = 0
+        for a in A:
+            p += a
+            res += st.bisect_right(p - (goal + k))
+            res += len(st) - st.bisect_left(p - (goal - k))
+            st.add(p)
+        return res
+```
+
+### CPP (`solution.cpp`)
+
+```cpp
 class Solution {
 public:
     long long int sol = 0;
     void merge(vector<long long int>& st, vector<long long int>& temp,
                int l, int mid, int r, int goal, int k) {
+
         int p1 = l;
         int p2 = l;
 
@@ -178,15 +195,14 @@ public:
 };
 ```
 
-### CPP (`solution.cpp`)
+### JAVA (`solution.java`)
 
-```cpp
+```java
 class Solution {
 public:
     long long int sol = 0;
     void merge(vector<long long int>& st, vector<long long int>& temp,
                int l, int mid, int r, int goal, int k) {
-
         int p1 = l;
         int p2 = l;
 
